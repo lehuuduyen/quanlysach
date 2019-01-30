@@ -1,8 +1,8 @@
 <div class="sidebar" data-color="orange" data-background-color="black">
 
     <div class="logo">
-        <a href="https://lnmai.com" target="_blank" class="simple-text logo-mini"> LM </a>
-        <a href="https://lnmai.com" target="_blank" class="simple-text logo-normal"> Loc Mai </a>
+        <a href="https://lnmai.com" target="_blank" class="simple-text logo-mini"> DL </a>
+        <a href="https://lnmai.com" target="_blank" class="simple-text logo-normal"> Duyen Le </a>
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
@@ -59,61 +59,28 @@
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" data-toggle="collapse" href="#tools">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#books">
                     <i class="material-icons">build</i>
-                    <p> Tools
+                    <p> Book
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse show" id="tools">
+                <div class="collapse show" id="books">
                     <ul class="nav">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/bingreward/">
-                                <span class="sidebar-mini"> B </span>
-                                <span class="sidebar-normal"> Bing Reward Bot </span>
+                        <li class="nav-item " id="book-list">
+                            <a class="nav-link" href="{{url('admin/book-list')}}">
+                                <span class="sidebar-mini"> L </span>
+                                <span class="sidebar-normal"> List Book</span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/cloudvision/">
-                                <span class="sidebar-mini">
-                                <i class="fa fa-google"></i>
-                                </span>
-                                <span class="sidebar-normal"> Cloud Vision Demo </span>
+                        <li class="nav-item " id="book-add">
+                            <a class="nav-link" href="{{url('admin/book-add')}}">
+                                <span class="sidebar-mini"> A </span>
+                                <span class="sidebar-normal"> Add Book</span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/fbcleaner/">
-                                <span class="sidebar-mini">
-                                <i class="fa fa-facebook-f"></i>
-                                </span>
-                                <span class="sidebar-normal"> FB Interaction Scanner </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/fbprivacy/">
-                                <span class="sidebar-mini">
-                                <i class="fa fa-facebook-f"></i>
-                                </span>
-                                <span class="sidebar-normal"> FB Privacy Changer</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/fbshield/">
-                            <span class="sidebar-mini">
-                            <i class="fa fa-facebook-f"></i>
-                            </span>
-                                <span class="sidebar-normal"> FB Profile Picture Guard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/fbtoken/">
-                        <span class="sidebar-mini">
-                        <i class="fa fa-facebook-f"></i>
-                        </span>
-                                <span class="sidebar-normal"> FB Token</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </li>

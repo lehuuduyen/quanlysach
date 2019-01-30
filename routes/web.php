@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('admin', function () {
-    return view('src.access_token');
+Route::prefix('admin')->group(function () {
+    Route::get('book-list', function () {
+        return view('src.admin.book.list');
+    });
 });
-

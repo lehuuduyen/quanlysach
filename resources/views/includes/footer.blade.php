@@ -71,5 +71,7 @@
 
 <script src="{{url('')}}/js/plugins/fullcalendar.min.js"></script>
 <script src="{{url('')}}/js/md5.js"></script>
-<script src="{{url('')}}/js/fbtoken.js?v=1.0.0"></script>
+<script src="{{url('')}}/js/core/script.js"></script>
+
+@yield('footer')
 </html>
