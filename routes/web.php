@@ -14,4 +14,7 @@ Route::prefix('admin')->group(function () {
     Route::get('book-list', function () {
         return view('src.admin.book.list');
     });
+    Route::get('book-add', function () {
+        return view('src.admin.book.add');
+    });
 });
