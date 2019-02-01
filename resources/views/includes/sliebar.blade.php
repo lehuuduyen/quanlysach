@@ -75,9 +75,9 @@
                             </a>
                         </li>
                         <li class="nav-item " id="book-add">
-                            <a class="nav-link" href="{{url('admin/book-add')}}">
-                                <span class="sidebar-mini"> A </span>
-                                <span class="sidebar-normal"> Add Book</span>
+                            <a class="nav-link" href="{{url('admin/book-order')}}">
+                                <span class="sidebar-mini"> O </span>
+                                <span class="sidebar-normal"> Order Book</span>
                             </a>
                         </li>
 

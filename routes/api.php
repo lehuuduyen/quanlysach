@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 //    return 1;
 //});
 Route::prefix('book')->group(function () {
+    Route::get('show/{id}','BookController@show');
     Route::get('list','BookController@index');
     Route::post('store','BookController@store');
 });

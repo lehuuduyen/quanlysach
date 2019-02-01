@@ -43,9 +43,9 @@
 
                     <div class="form-group bmd-form-group is-filled">
                         <label class="bmd-label-floating"> Description.</label>
-                        <textarea name="description" class="form-control" rows="5"></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                     </div>
-                    <select class="selectpicker mb-3 " name="status" id="select"  data-style="btn  btn-round" title="Single Select">
+                    <select class="selectpicker mb-3 " name="status" id="status"  data-style="btn  btn-round" title="Single Select">
                         <option disabled selected value=" " >Single Option</option>
                         <option value="0">Out of stock</option>
                         <option value="1">Stocking</option>
@@ -79,6 +79,7 @@
                         <th field="status">
                             Status
                         </th>
+
                         </thead>
                         <tbody>
 
@@ -182,8 +183,8 @@
                     data: formData,
                     success: function (data) {
                         swal("Good job!", data.message, "success");
-                        $("#select").val(" ");
-                        $('#select').selectpicker('refresh')
+                        $("#status").val(" ");
+                        $('#status').selectpicker('refresh')
                         document.getElementById("form_add_book").reset();
                         $('#tableData').DataTable().ajax.reload();
                     },
@@ -198,6 +199,10 @@
 
 
         })
+
+
+
+
     </script>
 
 @endsection

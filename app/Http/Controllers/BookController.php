@@ -34,6 +34,7 @@ class BookController extends BaseController
 
                 return $str;
             })
+
             ->rawColumns(['image','status'])->make(TRUE);
     }
 
@@ -80,7 +81,7 @@ class BookController extends BaseController
      */
     public function show($id)
     {
-        //
+        return $this->responseSuccess(Book::find($id));
     }
 
     /**
