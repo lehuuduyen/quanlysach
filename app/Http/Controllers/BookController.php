@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Order;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Input;
@@ -71,6 +72,15 @@ class BookController extends BaseController
             return $this->responseSuccess($kq);
         }
         return $this->responseServerError("Hệ thống đang nghẽn, vui lòng quay lại sau");
+    }
+    public function vote(Request $request)
+    {
+        $kq=Order::create($request->all());
+
+
+
+            return $this->responseSuccess($kq);
+
     }
 
     /**

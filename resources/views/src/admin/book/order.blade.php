@@ -106,12 +106,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form id="form-vote">
+                <input type="hidden" name="book_id" id="id">
                 <div class="modal-body">
 
                     <div class="col">
                        @for($i=0;$i<=10;$i++)
                             <label class="form-check-label mr-5">
-                                <input class="form-check-input" style="cursor:pointer" type="radio" name="vote" id="exampleRadios2"
+                                <input class="form-check-input" style="cursor:pointer" type="radio" name="rate" id="exampleRadios2"
                                        value="{{$i}}">
                                 {{$i}}
 
@@ -121,8 +123,9 @@
                     </div>
 
                 </div>
+                </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save Vote</button>
+                    <button type="button" onclick="btn_vote()" class="btn btn-primary" >Save Vote</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -187,7 +190,7 @@
                     "targets": -1,
                     "data": null,
                     render: function (data, type, full, meta) {
-                        return '<button class="btn btn-primary" onclick="update_book(' + full.id + ')">Edit!</button>';
+                        return '<button class="btn btn-primary" onclick="detail(' + full.id + ')">Edit!</button>';
                     },
 
                 }],
@@ -246,12 +249,12 @@
         })
 
 
-        function update_book(id) {
+        function detail(id) {
             $.ajax({
                 url: "{{url('api/book/show')}}/" + id,
                 type: 'GET',
                 success: function (kq) {
-                    $("#vote-a").attr('display','block')
+                    $("#vote-a").css('display','block')
                     var data = kq.data;
                     $.each(data, function (k, v) {
                         $("#" + k).val(v);
@@ -270,6 +273,21 @@
                             $("#modal_title").text(v)
                         }
                     })
+                },
+
+            });
+        }
+
+
+        function btn_vote(){
+
+            $.ajax({
+                url: "{{url('api/book/vote')}}" ,
+                type: 'post',
+                data:$('#form-vote').serialize(),
+                success: function (kq) {
+                    swal("Good job!", data.message, "success");
+
                 },
 
             });

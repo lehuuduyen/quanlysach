@@ -9,6 +9,6 @@ class Book extends Model
     protected $table = "books";
     protected $fillable = [
         'title', 'description', 'content',
-        'author', 'status','image'
+        'author', 'status','image','is_order','sum'
     ];
 }

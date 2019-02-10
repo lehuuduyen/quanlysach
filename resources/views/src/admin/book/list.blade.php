@@ -25,7 +25,7 @@
                 <div class="card-body ">
                     <div class="form-group bmd-form-group">
                         <label for="title" class="bmd-label-floating"> Title</label>
-                        <input type="text" class="form-control" id="title" aria- 
+                        <input type="text" class="form-control" id="title" aria-
                                name="title"
                                autocomplete="off">
                     </div>

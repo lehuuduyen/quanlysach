@@ -20,6 +20,8 @@ class CreateBooksTable extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('author');
+            $table->integer('sum')->default(0);
+            $table->tinyInteger('is_order')->default(1);
             $table->tinyInteger('status')->default(1);
 
             $table->timestamps();

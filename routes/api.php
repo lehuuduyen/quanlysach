@@ -20,4 +20,5 @@ Route::prefix('book')->group(function () {
     Route::get('show/{id}','BookController@show');
     Route::get('list','BookController@index');
     Route::post('store','BookController@store');
+    Route::post('vote','BookController@vote');
 });
