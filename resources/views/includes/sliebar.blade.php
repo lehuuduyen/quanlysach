@@ -76,8 +76,8 @@
                         </li>
                         <li class="nav-item " id="book-add">
                             <a class="nav-link" href="{{url('admin/book-order')}}">
-                                <span class="sidebar-mini"> O </span>
-                                <span class="sidebar-normal"> Order Book</span>
+                                <span class="sidebar-mini"> V </span>
+                                <span class="sidebar-normal"> Vote Book</span>
                             </a>
                         </li>
 

@@ -51,7 +51,7 @@
                         <option value="0">Out of stock</option>
                         <option value="1">Stocking</option>
                     </select>
-                    <a class="btn btn-primary btn-lg mx-auto d-block" id="vote-a" style="display: none !important;" data-toggle="modal" data-target="#vote" data-original-title>
+                    <a class="btn btn-primary btn-lg mx-auto" id="vote-a" style="display: none !important;" data-toggle="modal" data-target="#vote" data-original-title>
                         Vote Now!
                     </a>
 
@@ -81,6 +81,9 @@
                         <th field="content">
                             Content
                         </th>
+                        <th field="sum">
+                            Sum
+                        </th>
                         <th field="status">
                             Status
                         </th>
@@ -107,22 +110,22 @@
                     </button>
                 </div>
                 <form id="form-vote">
-                <input type="hidden" name="book_id" id="id">
-                <div class="modal-body">
+                    <input type="hidden" name="book_id" id="id">
+                    <div class="modal-body">
 
-                    <div class="col">
-                       @for($i=0;$i<=10;$i++)
-                            <label class="form-check-label mr-5">
-                                <input class="form-check-input" style="cursor:pointer" type="radio" name="rate" id="exampleRadios2"
-                                       value="{{$i}}">
-                                {{$i}}
+                        <div class="col">
 
-                            </label>
-                       @endfor
+                            @for($i=1;$i<=10;$i++)
+                                <label class="form-check-label mr-5">
+                                    <input class="form-check-input" style="cursor:pointer" type="radio" name="rate"
+                                           value="{{$i}}">
+                                    {{$i}}
+                                </label>
+                            @endfor
+
+                        </div>
 
                     </div>
-
-                </div>
                 </form>
                 <div class="modal-footer">
                     <button type="button" onclick="btn_vote()" class="btn btn-primary" >Save Vote</button>
@@ -137,50 +140,30 @@
 
 @section('footer')
     <script>
-
-
         function jsUcfirst(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-
-
         //datatable
         fields = [];
         var $tableData = $('#tableData > thead > tr > th').each(function () {
-
             var value = $(this).attr('field');
-
             fields.push({data: value, name: value});
-
         }).promise().done(function () {
-
             datatables = $('#tableData').DataTable({
-
                 processing: true,
-
                 serverSide: true,
-
                 "aLengthMenu": [[5, 50, 75, -1], [5, 50, 75, "All"]],
-
                 "iDisplayLength": 5,
-
                 ajax: {
-
                     url: "{{url('api/book/list')}}",
-
                     //                    data: function (d) {
                     //
                     //                        d.data = request;
                     //                    }
-
                 },
-
                 order:
-
                     [[0, 'desc']],
-
                 // dom: 'Bfrtip',
-
                 // buttons: [
                 //
                 //     'copy', 'csv', 'excel', 'pdf', 'print'
@@ -192,31 +175,22 @@
                     render: function (data, type, full, meta) {
                         return '<button class="btn btn-primary" onclick="detail(' + full.id + ')">Edit!</button>';
                     },
-
                 }],
                 columns: fields
-
             });
-
         });
-
-
         $("#form_add_book").submit(function (e) {
             e.preventDefault();
-
             var str = $('#form_add_book').serialize()
             var array = str.split('&');
             var str_error = '';
             var formData = new FormData(this);
-
             var file = $('#file')[0].files[0];
             if (!array[4]) {
                 array[4] = "status=";
             }
-
             $.each(array, function (k, v) {
                 var array_check = v.split('=');
-
                 if (array_check[1] == "") {
                     str_error += jsUcfirst(array_check[0]) + " không được để trống <br>";
                 }
@@ -240,15 +214,10 @@
                     contentType: false,
                     processData: false
                 });
-
             } else {
                 swal("Not Empty!", str_error, "error");
             }
-
-
         })
-
-
         function detail(id) {
             $.ajax({
                 url: "{{url('api/book/show')}}/" + id,
@@ -256,7 +225,6 @@
                 success: function (kq) {
                     $("#vote-a").css('display','block')
                     $("#file").attr('disabled','disabled');
-
                     var data = kq.data;
                     $.each(data, function (k, v) {
                         if(k!='id'){
@@ -278,30 +246,40 @@
                             $("#modal_title").text(v)
                         }
                     })
-
                 },
-
             });
         }
-
-
         function btn_vote(){
+            var rate=$("input[name='rate']:checked").val();
+            console.log(rate)
+            if(rate!=null){
 
-            $.ajax({
-                url: "{{url('api/book/vote')}}" ,
-                type: 'post',
-                data:$('#form-vote').serialize(),
-                success: function (kq) {
-                    swal("Good job!", kq.message, "success");
-                    var data = kq.data;
-                    $.each(data, function (k, v) {
-                        $("#" + k).attr('disabled','');
-                        $("#file").attr('disabled','');
-                    })
+                $.ajax({
+                    url: "{{url('api/book/vote')}}" ,
+                    type: 'post',
+                    data:$('#form-vote').serialize(),
+                    success: function (kq) {
+                        swal("Good job!", kq.message, "success");
+                        document.getElementById("form-vote").reset();
+                        document.getElementById("form_add_book").reset();
+                        $('#tableData').DataTable().ajax.reload();
 
-                },
+                        $("#vote-a").css('display','none')
+                        $("#vote").modal('hide')
 
-            });
+                        var data = kq.data;
+                        $.each(data, function (k, v) {
+                            console.log(k)
+                            $("#" + k).removeAttr('disabled');
+                            $("#file").removeAttr('disabled');
+                        })
+                    },
+                });
+            }
+            else{
+                swal("Error!","Not Empty", "error");
+
+            }
         }
     </script>
 

@@ -77,9 +77,11 @@ class BookController extends BaseController
     {
         $kq=Order::create($request->all());
 
-
-
-            return $this->responseSuccess($kq);
+        //cap nhat
+        $book=Book::find($request->book_id);
+        $sum=$book->sum +$request->rate;
+        Book::find($request->book_id)->update(['sum'=>$sum]);
+            return $this->responseSuccess(Book::find($request->book_id));
 
     }
 
