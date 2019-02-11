@@ -15,7 +15,7 @@
                             <span class="btn btn-raised btn-round btn-rose btn-file">
                                <span class="fileinput-new">Select image</span>
                                <span class="fileinput-exists">Change</span>
-                               <input type="file" id="file" disabled name="image"/>
+                               <input type="file" id="file"  name="image"/>
                             </span>
                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
                             <i class="fa fa-times"></i> Remove</a>
@@ -25,29 +25,29 @@
                 <div class="card-body ">
                     <div class="form-group bmd-form-group">
                         <label for="title" class="bmd-label-floating"> Title</label>
-                        <input type="text" disabled class="form-control" id="title" aria-
+                        <input type="text"  class="form-control" id="title" aria-
                                name="title"
                                autocomplete="off">
                     </div>
                     <div class="form-group bmd-form-group">
                         <label for="author" class="bmd-label-floating"> Author</label>
-                        <input type="text" disabled class="form-control" id="author" name="author"
+                        <input type="text"  class="form-control" id="author" name="author"
                                autocomplete="off">
                     </div>
                     <div class="form-group bmd-form-group">
                         <label for="content" class="bmd-label-floating"> Content</label>
-                        <input type="text" disabled class="form-control" id="content" name="content"
+                        <input type="text"  class="form-control" id="content" name="content"
                                autocomplete="off">
                     </div>
 
 
                     <div class="form-group bmd-form-group is-filled">
                         <label class="bmd-label-floating"> Description.</label>
-                        <textarea name="description" disabled id="description" class="form-control" rows="5"></textarea>
+                        <textarea name="description"  id="description" class="form-control" rows="5"></textarea>
                     </div>
-                    <select class="selectpicker mb-3 " disabled name="status" id="status" data-style="btn  btn-round"
+                    <select class="selectpicker mb-3 "  name="status" id="status" data-style="btn  btn-round"
                             title="Single Select">
-                        <option disabled selected value=" ">Single Option</option>
+                        <option  selected value=" ">Single Option</option>
                         <option value="0">Out of stock</option>
                         <option value="1">Stocking</option>
                     </select>
@@ -255,8 +255,13 @@
                 type: 'GET',
                 success: function (kq) {
                     $("#vote-a").css('display','block')
+                    $("#file").attr('disabled','disabled');
+
                     var data = kq.data;
                     $.each(data, function (k, v) {
+                        if(k!='id'){
+                            $("#" + k).attr('disabled','disabled');
+                        }
                         $("#" + k).val(v);
                         $("#" + k).parent('div').addClass('is-filled');
                         if (k == 'status') {
@@ -273,6 +278,7 @@
                             $("#modal_title").text(v)
                         }
                     })
+
                 },
 
             });
@@ -286,7 +292,12 @@
                 type: 'post',
                 data:$('#form-vote').serialize(),
                 success: function (kq) {
-                    swal("Good job!", data.message, "success");
+                    swal("Good job!", kq.message, "success");
+                    var data = kq.data;
+                    $.each(data, function (k, v) {
+                        $("#" + k).attr('disabled','');
+                        $("#file").attr('disabled','');
+                    })
 
                 },
 
